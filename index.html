@@ -81,9 +81,56 @@
     <li>
       <a href="articles/article3.html" target="_blank">
         <span class="pdf-icon">📄</span>
-        L'importanza dei Modelli Mentali
+        L'importanza dei modelli mentali
       </a>
   </ul>
+
+  <div id="feedback-container" style="position: fixed; bottom: 20px; right: 20px; background: white; border: 1px solid #ccc; padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000;">
+    <h4 style="margin: 0; font-family: sans-serif;">Send Feedback</h4>
+    <input type="text" id="user-name-input" placeholder="Your name (Optional)" style="padding: 5px;">
+    <textarea id="feedback-input" placeholder="Enter feedback..." style="padding: 5px; min-height: 60px;"></textarea>
+    <button onclick="submitFeedback()" style="background: #007bff; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;">Send</button>
+</div>
 </body>
 </html>
 
+<script>
+async function submitFeedback() {
+    // 1. Grab data from the inputs
+    const feedbackText = document.getElementById('feedback-input').value;
+    const userName = document.getElementById('user-name-input').value || "Anonymous";
+
+    // Validation: Don't send empty messages
+    if (!feedbackText.trim()) {
+        alert("Please enter some feedback first!");
+        return;
+    }
+
+    try {
+        // 2. Send the POST request to your FastAPI server
+        const response = await fetch('http://127.0.0.1:8000/submit-feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                message: feedbackText,
+                user_name: userName
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Feedback sent successfully!");
+            // Clear the input after success
+            document.getElementById('feedback-input').value = "";
+        } else {
+            alert("Error: " + data.detail);
+        }
+    } catch (error) {
+        console.error("Connection failed:", error);
+        alert("Could not connect to the server. Is FastAPI running?");
+    }
+}
+</script>

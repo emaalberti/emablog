@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-pymysql
-cryptography
-flask-cors
-pydantic
-python-dotenv

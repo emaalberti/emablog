@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,59 +7,127 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    body {
-      background : #ffffff;
-      color: #0a1f44;
-      font-family: 'DM Sans', sans-serif;
-      min-height: 100vh;
-      padding: 60px 20px;
-    }
+  body {
+    background: #ffffff;
+    color: #0a1f44;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      text-align: center;
-      margin-bottom: 60px;
-      letter-spacing: .02em;
-    }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: .02em;
+  }
 
-    .pdf-list {
-      list-style: none;
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
+  .pdf-list {
+    list-style: none;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
 
-    .pdf-list li a {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 18px 24px;
-      border: 1.5px solid #0a1f44;
-      border-radius: 4px;
-      text-decoration: none;
-      color: #0a1f44;
-      font-size: .95rem;
-      transition: background .2s, color .2s;
-    }
+  .pdf-list li a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 24px;
+    border: 1.5px solid #0a1f44;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #0a1f44;
+    font-size: .95rem;
+    transition: background .2s, color .2s;
+  }
 
-    .pdf-list li a:hover {
-      color: #ffffff;
-      background: #0a1f44;
-    }
+  .pdf-list li a:hover {
+    color: #ffffff;
+    background: #0a1f44;
+  }
 
-    .pdf-icon {
-      font-size: 1.2rem;
+  /* --- STILE FEEDBACK RESPONSIVE --- */
+  #feedback-container {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: white;
+    border: 1px solid #0a1f44; /* Usiamo il colore del tuo brand */
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 10px 25px rgba(10, 31, 68, 0.1);
+    z-index: 1000;
+    width: 350px;
+    transition: all 0.3s ease;
+  }
+
+  #feedback-container h4 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    color: #0a1f44;
+  }
+
+  #feedback-container input, 
+  #feedback-container textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+  }
+
+  #feedback-container button {
+    background: #0a1f44; /* Colore scuro del tuo brand */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: opacity 0.2s;
+  }
+
+  #feedback-container button:hover {
+    opacity: 0.9;
+  }
+
+  .close-feedback {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #0a1f44;
+    background: none;
+    border: none;
+  }
+
+  /* Mobile: sotto i 480px di larghezza */
+  @media (max-width: 480px) {
+    #feedback-container {
+      bottom: 0;
+      right: 0;
+      width: 100%; /* Occupa tutta la larghezza in basso */
+      border-radius: 15px 15px 0 0; /* Arrotonda solo gli angoli superiori */
+      border-bottom: none;
+      padding: 25px 20px;
     }
-  </style>
+  }
+</style>
 </head>
 <body>
 
@@ -85,52 +153,45 @@
       </a>
   </ul>
 
-  <div id="feedback-container" style="position: fixed; bottom: 20px; right: 20px; background: white; border: 1px solid #ccc; padding: 15px; border-radius: 8px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); z-index: 1000;">
-    <h4 style="margin: 0; font-family: sans-serif;">Send Feedback</h4>
-    <input type="text" id="user-name-input" placeholder="Your name (Optional)" style="padding: 5px;">
-    <textarea id="feedback-input" placeholder="Enter feedback..." style="padding: 5px; min-height: 60px;"></textarea>
-    <button onclick="submitFeedback()" style="background: #007bff; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer;">Send</button>
+<div id="feedback-container">
+  <button class="close-feedback" onclick="document.getElementById('feedback-container').style.display='none'">×</button>
+  <h4>Feedback</h4>
+  <input type="text" id="user-name-input" placeholder="Il tuo nome (opzionale)">
+  <textarea id="feedback-input" placeholder="Cosa ne pensi?"></textarea>
+  <button onclick="submitFeedback()">Invia</button>
 </div>
 </body>
 </html>
 
 <script>
 async function submitFeedback() {
-    // 1. Grab data from the inputs
     const feedbackText = document.getElementById('feedback-input').value;
     const userName = document.getElementById('user-name-input').value || "Anonymous";
 
-    // Validation: Don't send empty messages
     if (!feedbackText.trim()) {
-        alert("Please enter some feedback first!");
+        alert("Scrivi qualcosa prima di inviare!");
         return;
     }
 
     try {
-        // 2. Send the POST request to your FastAPI server
+        // Ricordati di cambiare l'URL con quello di Render quando sarai live!
         const response = await fetch('https://pyserverblog.onrender.com/submit-feedback', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 message: feedbackText,
                 user_name: userName
             })
         });
 
-        const data = await response.json();
-
         if (response.ok) {
-            alert("Feedback sent successfully!");
-            // Clear the input after success
+            alert("Grazie! Feedback ricevuto.");
             document.getElementById('feedback-input').value = "";
-        } else {
-            alert("Error: " + data.detail);
+            document.getElementById('feedback-container').style.display = 'none';
         }
     } catch (error) {
-        console.error("Connection failed:", error);
-        alert("Could not connect to the server. Is FastAPI running?");
+        console.error("Errore:", error);
+        alert("C'è stato un problema con l'invio.");
     }
 }
 </script>

@@ -2,15 +2,6 @@ blog personale in cui scrivo mie riflessioni :)
 
 aperto a tutti, fate una pull request inserendo l'html seguendo il template in articles/ e aggiungendo il codice in index.html, o droppatemi direttamente il pdf a questa e-mail: emanuelealberti1903@gmail.com
 
-ricordatevi il virtual environment prima di partire o è m*rda:
-
-(per mac)
-createlo:
-python3 -m venv venv
-
-attivatelo:
-source venv/bin/activate
-
 Per ora ho utilizzato solo servizi gratuiti non essendo un web developer e non avendo soldi:
 - github pages per hostare il fronted (è solo statico)
 - render per il web server in python
